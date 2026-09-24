@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-base-950 text-zinc-100 antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 110%, rgba(56, 189, 248, 0.08), transparent);
+  background-attachment: fixed;
+  font-feature-settings: "cv02", "cv03", "cv04";
+}
+
+::selection {
+  @apply bg-violet-500/40 text-white;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-zinc-700;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-zinc-600;
+}
+
+/* ---------- Reusable classes ---------- */
+.glass {
+  @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-violet-400 via-fuchsia-400 to-sky-400 bg-clip-text text-transparent;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:border-violet-500/40 hover:shadow-glow;
+}
+
+.skeleton {
+  @apply animate-shimmer rounded-xl;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+}
+
+/* ---------- Markdown (README viewer) ---------- */
+.markdown-body {
+  @apply text-[15px] leading-7 text-zinc-300;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4 {
+  @apply mb-4 mt-10 font-semibold text-white;
+}
+.markdown-body h1 {
+  @apply border-b border-white/10 pb-3 text-3xl;
+}
+.markdown-body h2 {
+  @apply border-b border-white/10 pb-2 text-2xl;
+}
+.markdown-body h3 {
+  @apply text-xl;
+}
+.markdown-body p {
+  @apply my-4;
+}
+.markdown-body a {
+  @apply text-violet-400 underline-offset-4 transition hover:text-violet-300 hover:underline;
+}
+.markdown-body ul {
+  @apply my-4 list-disc space-y-1 pl-6;
+}
+.markdown-body ol {
+  @apply my-4 list-decimal space-y-1 pl-6;
+}
+.markdown-body li {
+  @apply pl-1;
+}
+.markdown-body code {
+  @apply rounded-md bg-zinc-800/80 px-1.5 py-0.5 font-mono text-[13px] text-fuchsia-300;
+}
+.markdown-body pre {
+  @apply my-5 overflow-x-auto rounded-xl border border-white/10 bg-base-900 p-4;
+}
+.markdown-body pre code {
+  @apply bg-transparent p-0 text-zinc-200;
+}
+.markdown-body blockquote {
+  @apply my-4 border-l-4 border-violet-500/50 bg-white/[0.03] py-1 pl-4 italic;
+}
+.markdown-body table {
+  @apply my-5 block w-full overflow-x-auto rounded-xl border border-white/10 text-sm;
+}
+.markdown-body th {
+  @apply border-b border-white/10 bg-white/[0.04] px-4 py-2.5 text-left font-semibold text-white;
+}
+.markdown-body td {
+  @apply border-b border-white/5 px-4 py-2.5 align-top;
+}
+.markdown-body img {
+  @apply mx-auto my-6 max-w-full rounded-xl;
+}
+.markdown-body hr {
+  @apply my-8 border-white/10;
+}

@@ -4,7 +4,7 @@
 
 **Describe what you want to build — instantly discover the best open-source repositories on GitHub.**
 
-[![CI](https://github.com/<  arkajitadhikary-gif>/repo-finder/actions/workflows/ci.yml/badge.svg)](https://github.com/<  arkajitadhikary-gif>/repo-finder/actions/workflows/ci.yml)
+[![CI](https://github.com/arkajitadhikary-gif/repo-finder/actions/workflows/ci.yml/badge.svg)](https://github.com/arkajitadhikary-gif/repo-finder/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
@@ -63,7 +63,7 @@ search, when you already know what you're looking for.
 **Requires Node.js 20+.**
 
 ```bash
-git clone https://github.com/<arkajitadhikary-gif>/repo-finder.git
+git clone https://github.com/arkajitadhikary-gif/repo-finder.git
 cd repo-finder
 npm install
 npm run dev
@@ -96,7 +96,7 @@ The navbar links to `NEXT_PUBLIC_REPO_URL` (falls back to a placeholder).
 Set it in `.env.local` once you've forked/published this:
 
 ```
-NEXT_PUBLIC_REPO_URL=https://github.com/  arkajitadhikary-gif/your-fork
+NEXT_PUBLIC_REPO_URL=https://github.com/arkajitadhikary-gif/repo-finder
 ```
 
 ## 📁 Project structure

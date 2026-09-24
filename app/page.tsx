@@ -6,13 +6,7 @@ import RepoCard, { type RepoResult } from "@/components/RepoCard";
 import {
   IconSearch,
   IconSparkles,
-  IconGithub,
 } from "@/components/icons";
-
-/** Edit this to point at your own fork/clone once you publish it. */
-const REPO_URL =
-  process.env.NEXT_PUBLIC_REPO_URL ??
-  "https://github.com/<  arkajitadhikary-gif>/repo-finder";
 
 type SearchMode = "smart" | "simple";
 
@@ -108,32 +102,13 @@ export default function HomePage() {
               Repo<span className="text-gradient">Finder</span>
             </span>
           </Link>
-          <a
-            href={REPO_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="glass flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-zinc-300 transition hover:border-white/20 hover:text-white"
-          >
-            <IconGithub className="h-4 w-4" />
-            <span className="hidden sm:inline">Open Source</span>
-          </a>
         </div>
       </header>
 
       {/* ---------------- Hero ---------------- */}
       <main className="flex-1">
         <section className="mx-auto max-w-3xl px-4 pb-10 pt-16 text-center sm:px-6 sm:pt-24">
-          <div className="animate-fade-up">
-            <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-zinc-300">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              Powered by the GitHub Search API
-            </span>
-          </div>
-
-          <h1 className="animate-fade-up mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl [animation-delay:80ms]">
+          <h1 className="animate-fade-up text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
             From idea to repository
             <br />
             <span className="text-gradient">in seconds.</span>

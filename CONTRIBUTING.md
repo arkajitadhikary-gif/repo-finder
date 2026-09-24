@@ -5,7 +5,7 @@ Thanks for considering a contribution! This is a small project, so the process i
 ## Getting set up
 
 ```bash
-git clone https://github.com/<  arkajitadhikary-gif>/repo-finder.git
+git clone https://github.com/arkajitadhikary-gif/repo-finder.git
 cd repo-finder
 npm install
 cp .env.example .env.local   # optional: add a GITHUB_TOKEN for higher rate limits

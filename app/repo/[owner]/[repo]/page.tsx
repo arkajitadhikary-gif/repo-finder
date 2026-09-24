@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getRepo, getReadme, getLanguages } from "@/lib/github";
 import { formatStars, timeAgo, languageColor } from "@/lib/format";
-import Markdown from "@/components/Markdown";
 import CloneButton from "@/components/CloneButton";
+import RepoDetailTabs from "@/components/RepoDetailTabs";
 import {
   IconArrowLeft,
   IconExternal,
@@ -70,9 +70,15 @@ export default async function RepoPage({ params }: PageProps) {
     : [];
   const totalBytes = langEntries.reduce((sum, [, n]) => sum + n, 0) || 1;
 
+  // 1-Click Launch URLs
+  const githubDevUrl = `https://github.dev/${repo.owner.login}/${repo.name}`;
+  const stackBlitzUrl = `https://stackblitz.com/github/${repo.owner.login}/${repo.name}`;
+  const vercelDeployUrl = `https://vercel.com/new/clone?repository-url=https://github.com/${repo.owner.login}/${repo.name}`;
+  const railwayDeployUrl = `https://railway.com/new/template?template=https://github.com/${repo.owner.login}/${repo.name}`;
+
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         {/* Back */}
         <Link
           href="/"
@@ -125,8 +131,8 @@ export default async function RepoPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Actions */}
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          {/* Actions & 1-Click Launch Bar */}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href={repo.html_url}
               target="_blank"
@@ -137,17 +143,46 @@ export default async function RepoPage({ params }: PageProps) {
               View on GitHub
             </a>
             <CloneButton url={repo.html_url} />
-            {repo.homepage && (
+
+            {/* 1-Click Cloud IDEs */}
+            <div className="flex flex-wrap items-center gap-2 border-l border-white/10 pl-3">
               <a
-                href={repo.homepage}
+                href={githubDevUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="glass flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm transition hover:border-violet-500/40"
+                className="glass flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-zinc-300 transition hover:border-violet-500/40 hover:text-white"
+                title="Launch in Web VS Code"
               >
-                <IconExternal className="h-4 w-4 text-zinc-400" />
-                Homepage
+                <span>⚡ github.dev</span>
               </a>
-            )}
+              <a
+                href={stackBlitzUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="glass flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-zinc-300 transition hover:border-sky-500/40 hover:text-white"
+                title="Launch in browser container"
+              >
+                <span>⚡ StackBlitz</span>
+              </a>
+              <a
+                href={vercelDeployUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="glass flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-zinc-300 transition hover:border-white/40 hover:text-white"
+                title="1-Click deploy on Vercel"
+              >
+                <span>▲ Deploy Vercel</span>
+              </a>
+              <a
+                href={railwayDeployUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="glass flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-zinc-300 transition hover:border-purple-500/40 hover:text-white"
+                title="1-Click deploy on Railway"
+              >
+                <span>🚂 Deploy Railway</span>
+              </a>
+            </div>
           </div>
 
           {/* Stats */}
@@ -215,37 +250,17 @@ export default async function RepoPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* ---------- README ---------- */}
-        <section className="glass mt-8 rounded-3xl p-6 sm:p-10">
-          <div className="mb-6 flex items-center gap-3 border-b border-white/10 pb-5">
-            <svg
-              className="h-5 w-5 text-violet-400"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-            </svg>
-            <h2 className="text-lg font-semibold text-white">README</h2>
-          </div>
-          {readme ? (
-            <Markdown
-              imageBase={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${branch}`}
-            >
-              {readme}
-            </Markdown>
-          ) : (
-            <p className="text-sm text-zinc-500">
-              This repository has no README file.
-            </p>
-          )}
-        </section>
+        {/* ---------- Interactive Tabs: README + Code Explorer ---------- */}
+        <RepoDetailTabs
+          readme={readme}
+          imageBase={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${branch}`}
+          owner={repo.owner.login}
+          repo={repo.name}
+          defaultBranch={branch}
+        />
 
         <p className="mt-8 pb-8 text-center text-xs text-zinc-600">
-          Rendered by RepoFinder from the GitHub REST API ·{" "}
+          Rendered by RepoFinder with In-App Code Explorer ·{" "}
           <a
             href={repo.html_url}
             target="_blank"
